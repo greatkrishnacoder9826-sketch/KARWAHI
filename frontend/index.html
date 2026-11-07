@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#050203">
+  <title>KARWAHE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="stage">
+    <!-- LEFT: animated HUD core. Its state reflects the real app state only. -->
+    <section class="hud-wrap" aria-hidden="true">
+      <div id="orb" class="hud" data-state="idle">
+        <svg viewBox="0 0 400 400" class="hud-svg" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="core" cx="50%" cy="42%" r="62%">
+              <stop offset="0" stop-color="#4a0614"/><stop offset="1" stop-color="#090103"/>
+            </radialGradient>
+            <linearGradient id="sweep" gradientUnits="userSpaceOnUse" x1="200" y1="30" x2="347" y2="115">
+              <stop offset="0" stop-color="#ff1230" stop-opacity="0"/>
+              <stop offset="1" stop-color="#ff1230" stop-opacity=".55"/>
+            </linearGradient>
+            <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="3.2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="200" cy="200" r="193" class="ring dim"/>
+          <g class="spin" style="--d:90"><g id="ticks" class="ticks"></g></g>
+          <g class="spin rev" style="--d:45"><circle cx="200" cy="200" r="164" class="ring" stroke-dasharray="2 9"/></g>
+          <circle cx="200" cy="200" r="150" class="ring dim"/>
+          <circle cx="200" cy="200" r="136" class="ring dim" stroke-dasharray="3 6"/>
+
+          <g class="spin" style="--d:6"><path d="M200 200 L200 30 A170 170 0 0 1 347 115 Z" fill="url(#sweep)"/></g>
+
+          <g class="spin rev" style="--d:22"><circle cx="200" cy="200" r="118" class="arc" filter="url(#glow)"/></g>
+
+          <g class="spin" style="--d:55" opacity=".8">
+            <polygon points="200,95 291,252.5 109,252.5" class="line"/>
+            <polygon points="200,305 109,147.5 291,147.5" class="line"/>
+            <g class="node"><circle cx="200" cy="95" r="3"/><circle cx="291" cy="252.5" r="3"/><circle cx="109" cy="252.5" r="3"/>
+              <circle cx="200" cy="305" r="3"/><circle cx="109" cy="147.5" r="3"/><circle cx="291" cy="147.5" r="3"/></g>
+          </g>
+
+          <g class="spin" style="--d:28">
+            <circle cx="200" cy="30" r="6" class="dot" filter="url(#glow)"/><circle cx="200" cy="30" r="14" class="ring"/>
+            <circle cx="347" cy="285" r="4" class="dot" filter="url(#glow)"/>
+            <circle cx="53" cy="285" r="5" class="dot" filter="url(#glow)"/><circle cx="53" cy="285" r="13" class="ring"/>
+          </g>
+
+          <g class="core">
+            <circle cx="200" cy="200" r="72" fill="url(#core)" class="ring bold"/>
+            <circle cx="200" cy="200" r="62" class="ring dim"/>
+            <text x="200" y="226" text-anchor="middle" class="mono" filter="url(#glow)">K</text>
+            <text x="200" y="254" text-anchor="middle" class="tag">AI · COMPANION</text>
+          </g>
+        </svg>
+      </div>
+      <ul class="chips">
+        <li class="chip"><span class="k">AUTH</span><span class="v" id="chip-auth">LOCKED</span></li>
+        <li class="chip"><span class="k">VOICE</span><span class="v off" id="chip-voice">OFFLINE</span></li>
+        <li class="chip"><span class="k">MIC</span><span class="v off" id="chip-mic">OFF</span></li>
+        <li class="chip"><span class="k">MEMORY</span><span class="v off" id="chip-memory">LOCKED</span></li>
+      </ul>
+    </section>
+
+    <!-- RIGHT: control panel -->
+    <section class="panel">
+      <h1 class="title" data-text="KARWAHE">KARWAHE</h1>
+      <p id="status" class="status" role="status" aria-live="polite">SYSTEM: SIGNED OUT</p>
+
+      <div id="auth">
+        <form id="auth-form" class="stack">
+          <label>EMAIL<input id="email" type="email" required autocomplete="email"></label>
+          <label>PASSWORD<input id="password" type="password" required minlength="8" autocomplete="current-password"></label>
+          <div class="row">
+            <button type="submit" id="signin" class="btn">Sign in</button>
+            <button type="button" id="signup" class="btn ghost">Create account</button>
+          </div>
+        </form>
+      </div>
+
+      <nav id="tabs" class="tabs" hidden aria-label="Sections">
+        <button type="button" class="tab on" data-tab="chat">Chat &amp; Voice</button>
+        <button type="button" class="tab" data-tab="people">People</button>
+        <button type="button" class="tab" data-tab="memory">Memory</button>
+      </nav>
+
+      <div id="chat" hidden>
+        <div class="voice-bar">
+          <button type="button" id="voice-start" class="btn">&#9679; Start voice</button>
+          <button type="button" id="voice-pause" class="btn ghost" hidden>Pause</button>
+          <button type="button" id="voice-mute" class="btn ghost" hidden aria-pressed="false">Mute</button>
+          <button type="button" id="voice-interrupt" class="btn ghost" hidden>Interrupt</button>
+          <button type="button" id="voice-end" class="btn ghost" hidden>End</button>
+          <label class="check"><input type="checkbox" id="voice-continuous" checked> Continuous</label>
+        </div>
+        <div class="meter" aria-hidden="true"><i id="meter-fill"></i></div>
+        <p id="voice-note" class="note" role="status" aria-live="polite"></p>
+        <div id="log" class="log" aria-label="Conversation" aria-live="polite"></div>
+        <form id="chat-form" class="row">
+          <input id="msg" type="text" maxlength="4000" placeholder="Kuch bhi poochho..." aria-label="Message" autocomplete="off" required>
+          <button type="submit" class="btn">Send</button>
+        </form>
+      </div>
+      <div id="people" hidden><div id="rel-root"></div></div>
+
+      <div id="memory" hidden>
+        <div id="mem-root"></div>
+        <div class="card account">
+          <div class="k-label">ACCOUNT</div>
+          <div class="row">
+            <button type="button" id="export" class="btn ghost sm">Export my data</button>
+            <button type="button" id="signout" class="btn ghost sm">Sign out</button>
+          </div>
+          <p class="hint">Export mein sirf tumhara data aata hai (memories, people, conversations).</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

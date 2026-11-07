@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Namrata Didi",
+    "relation": "Didi",
+    "description": "One of the best and sweetest people in my life. She sometimes gets angry with me, but she cares for me and looks after me. She has helped me a great deal.",
+    "my_feelings": "I consider her a Devi because of her importance in my life. I feel respect, affection, gratitude and care toward her.",
+    "aliases": ["Namrata"],
+    "facts": []
+  },
+  {
+    "name": "Akansha Didi",
+    "relation": "Newest friend and sister",
+    "description": "Kind and friendly. She trusts me a lot and takes care of me.",
+    "my_feelings": "I value the sisterly bond, trust, friendship and care I associate with her.",
+    "aliases": ["Akansha"],
+    "facts": []
+  },
+  {
+    "name": "Retesh",
+    "relation": "Akansha Didi's husband",
+    "description": "A good, friendly and supportive person.",
+    "my_feelings": "",
+    "aliases": [],
+    "facts": []
+  },
+  {
+    "name": "Nikhil Rana",
+    "relation": "Best friend",
+    "description": "Strong and intelligent. He treats me with respect.",
+    "my_feelings": "",
+    "aliases": ["Nikhil"],
+    "facts": [{ "key": "Career", "value": "I believe he may become a Data Analyst soon (not confirmed, no job yet)" }]
+  }
+]
