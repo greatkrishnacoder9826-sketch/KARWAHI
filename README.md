@@ -146,3 +146,5 @@ Feedback and suggestions for improvement are welcome!
 <p align="center">
   Built with curiosity, code, and a passion for AI. 🤍
 </p>
+<img width="1891" height="906" alt="image" src="https://github.com/user-attachments/assets/e1d69d6e-ca5d-4d44-97e0-f33a8ce2b353" />
+
