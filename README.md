@@ -13,11 +13,6 @@
 
 ## 🎬 Project Demo
 
-Watch KARWAHI in action:
-
-[![KARWAHI — Project Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-
-> Replace `YOUR_VIDEO_ID` with your YouTube video's ID. Click the thumbnail to watch the demo.
 
 ## 💡 About the Project
 
